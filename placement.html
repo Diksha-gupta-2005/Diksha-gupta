@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Placement Portal Login</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --bg-gradient: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      width: 100%;
+      max-width: 450px;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header h2 {
+      color: #0f172a;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .header p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Role Switcher Tabs */
+    .role-switcher {
+      display: flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .role-btn {
+      flex: 1;
+      padding: 10px;
+      background: none;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .role-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .options-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .forgot-link {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="header">
+      <h2>Placement Portal</h2>
+      <p>Connect with top recruiters and track drives</p>
+    </div>
+
+    <!-- Role Switcher -->
+    <div class="role-switcher">
+      <button class="role-btn active" onclick="switchRole('student')">Student</button>
+      <button class="role-btn" onclick="switchRole('tpo')">TPO / Admin</button>
+    </div>
+
+    <!-- Form -->
+    <form id="placementForm" onsubmit="handlePlacementLogin(event)">
+      
+      <!-- Input Label switches dynamically via JS -->
+      <div class="form-group">
+        <label id="id-label" for="username">University Roll No. / Email</label>
+        <input type="text" id="username" placeholder="e.g., 2026CS104" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Portal Password</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+      </div>
+
+      <div class="options-row">
+        <label class="remember-me">
+          <input type="checkbox"> Remember session
+        </label>
+        <a href="#" class="forgot-link" onclick="alert('Verification link dispatched to registered database ID.')">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn">Login to Dashboard</button>
+    </form>
+
+    <div class="footer">
+      Drive Registration Issue? <a href="#" onclick="alert('Contact Placement Cell Helpdesk: tpo@college.edu')">Helpdesk</a>
+    </div>
+  </div>
+
+  <script>
+    let currentRole = 'student';
+
+    // Role बदलने का लॉजिक
+    function switchRole(role) {
+      currentRole = role;
+      
+      // बटन एक्टिव/डिएक्टिवेट स्टाइल
+      document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // रोल के हिसाब से प्लेसहोल्डर और लेबल बदलना
+      const label = document.getElementById('id-label');
+      const input = document.getElementById('username');
+      
+      if (role === 'tpo') {
+        label.innerText = "Officer ID / Admin Email";
+        input.placeholder = "e.g., tpo_officer@college.edu";
+      } else {
+        label.innerText = "University Roll No. / Email";
+        input.placeholder = "e.g., 2026CS104";
+      }
+    }
+
+    // लॉगिन सबमिट हैंडलर
+    function handlePlacementLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      
+      alert(`Access Authorized! Redirecting to ${currentRole.toUpperCase()} Placement Dashboard for Reference: ${username}`);
+    }
+  </script>
+
+</body>
+</html>
