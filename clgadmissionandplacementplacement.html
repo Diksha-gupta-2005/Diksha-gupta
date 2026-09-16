@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placement Tracking</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/placement.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f8fb;
+}
+
+.container{
+    width:90%;
+    max-width:1000px;
+    margin:30px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+    color:#0077b6;
+    margin-bottom:20px;
+}
+
+.student-info{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.student-info input{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th{
+    background:#0077b6;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    border:1px solid #ddd;
+    padding:12px;
+    text-align:center;
+}
+
+button{
+    padding:10px 20px;
+    background:#0077b6;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#023e8a;
+}
+
+.status{
+    font-weight:bold;
+}
+
+.selected{
+    color:green;
+}
+
+.rejected{
+    color:red;
+}
+
+.progress{
+    width:100%;
+    background:#ddd;
+    border-radius:20px;
+    margin-top:30px;
+}
+
+.bar{
+    width:0%;
+    height:25px;
+    background:#28a745;
+    border-radius:20px;
+    color:white;
+    text-align:center;
+    line-height:25px;
+}
+
+.summary{
+    margin-top:30px;
+    background:#eef7ff;
+    padding:20px;
+    border-radius:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Placement Tracking Dashboard</h1>
+
+<div class="student-info">
+
+<input type="text" placeholder="Student Name" id="studentName">
+
+<input type="text" placeholder="Roll Number" id="roll">
+
+<input type="number" placeholder="CGPA" id="cgpa">
+
+</div>
+
+<table>
+
+<tr>
+
+<th>Company</th>
+<th>Eligibility</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+<tr>
+
+<td>TCS</td>
+
+<td>Eligible</td>
+
+<td id="tcs" class="status">Not Applied</td>
+
+<td>
+
+<button onclick="applyCompany('tcs')">
+Apply
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Infosys</td>
+
+<td>Eligible</td>
+
+<td id="infosys" class="status">Not Applied</td>
+
+<td>
+
+<button onclick="applyCompany('infosys')">
+Apply
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Wipro</td>
+
+<td>Eligible</td>
+
+<td id="wipro" class="status">Not Applied</td>
+
+<td>
+
+<button onclick="applyCompany('wipro')">
+Apply
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Accenture</td>
+
+<td>Eligible</td>
+
+<td id="accenture" class="status">Not Applied</td>
+
+<td>
+
+<button onclick="applyCompany('accenture')">
+Apply
+</button>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>Capgemini</td>
+
+<td>Eligible</td>
+
+<td id="capgemini" class="status">Not Applied</td>
+
+<td>
+
+<button onclick="applyCompany('capgemini')">
+Apply
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+<div class="progress">
+
+<div class="bar" id="bar">
+
+0%
+
+</div>
+
+</div>
+
+<div class="summary">
+
+<h2>Placement Summary</h2>
+
+<p id="summary">
+
+No company applied yet.
+
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+let applied=0;
+
+function applyCompany(company){
+
+let status=document.getElementById(company);
+
+status.innerHTML="Applied";
+
+status.style.color="blue";
+
+applied++;
+
+let progress=(applied/5)*100;
+
+document.getElementById("bar").style.width=progress+"%";
+
+document.getElementById("bar").innerHTML=progress+"%";
+
+document.getElementById("summary").innerHTML=
+"You have applied to "+applied+" company(s).";
+
+setTimeout(function(){
+
+status.innerHTML="Interview Scheduled";
+status.style.color="orange";
+
+},2000);
+
+setTimeout(function(){
+
+status.innerHTML="Selected";
+status.classList.add("selected");
+
+},5000);
+
+}
+
+</script>
+<script src="js/placement.js"></script>
+</body>
+</html>

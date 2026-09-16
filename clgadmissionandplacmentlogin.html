@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Login</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+
+.login-container{
+    width:400px;
+    margin:80px auto;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.login-container h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#0077b6;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#0077b6;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:17px;
+}
+
+button:hover{
+    background:#023e8a;
+}
+
+.links{
+    margin-top:15px;
+    text-align:center;
+}
+
+.links a{
+    text-decoration:none;
+    color:#0077b6;
+}
+
+.links a:hover{
+    text-decoration:underline;
+}
+
+.dashboard{
+    display:none;
+    width:90%;
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.dashboard h2{
+    text-align:center;
+    color:#0077b6;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+table th{
+    background:#0077b6;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+
+.result{
+    text-align:center;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+<h2>Student Login</h2>
+
+<form onsubmit="login(event)">
+
+<div class="form-group">
+<label>Application Number / Email</label>
+<input type="text" id="username" required>
+</div>
+
+<div class="form-group">
+<label>Password</label>
+<input type="password" id="password" required>
+</div>
+
+<div class="form-group">
+<label>Course</label>
+
+<select id="course">
+
+<option>B.Tech</option>
+<option>BCA</option>
+<option>B.Sc</option>
+<option>MBA</option>
+
+</select>
+
+</div>
+
+<button type="submit">
+
+Login
+
+</button>
+
+</form>
+
+<div class="links">
+
+<p>
+
+<a href="register.html">New Student? Register</a>
+
+</p>
+
+<p>
+
+<a href="#">Forgot Password?</a>
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="dashboard" id="dashboard">
+
+<h2>Student Dashboard</h2>
+
+<h3>Placement Eligibility</h3>
+
+<div class="form-group">
+
+<label>CGPA</label>
+
+<input type="number" id="cgpa" step="0.1">
+
+</div>
+
+<div class="form-group">
+
+<label>Backlogs</label>
+
+<input type="number" id="backlogs">
+
+</div>
+
+<div class="form-group">
+
+<label>10th Percentage</label>
+
+<input type="number" id="tenth">
+
+</div>
+
+<div class="form-group">
+
+<label>12th Percentage</label>
+
+<input type="number" id="twelfth">
+
+</div>
+
+<button onclick="checkEligibility()">
+
+Check Eligibility
+
+</button>
+
+<div id="result" class="result"></div>
+
+<hr><br>
+
+<h3>Placement Tracking</h3>
+
+<table>
+
+<tr>
+
+<th>Company</th>
+
+<th>Status</th>
+
+</tr>
+
+<tr>
+
+<td>TCS</td>
+
+<td id="tcs">Not Applied</td>
+
+</tr>
+
+<tr>
+
+<td>Infosys</td>
+
+<td id="infosys">Not Applied</td>
+
+</tr>
+
+<tr>
+
+<td>Wipro</td>
+
+<td id="wipro">Not Applied</td>
+
+</tr>
+
+<tr>
+
+<td>Accenture</td>
+
+<td id="accenture">Not Applied</td>
+
+</tr>
+
+<tr>
+
+<td>Capgemini</td>
+
+<td id="capgemini">Not Applied</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<button onclick="updateStatus()">
+
+Update Placement Status
+
+</button>
+
+</div>
+
+<script>
+
+function login(event){
+
+event.preventDefault();
+
+let username=document.getElementById("username").value;
+
+alert("Welcome "+username);
+
+document.querySelector(".login-container").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+}
+
+function checkEligibility(){
+
+let cgpa=parseFloat(document.getElementById("cgpa").value);
+
+let backlogs=parseInt(document.getElementById("backlogs").value);
+
+let tenth=parseFloat(document.getElementById("tenth").value);
+
+let twelfth=parseFloat(document.getElementById("twelfth").value);
+
+let result=document.getElementById("result");
+
+if(cgpa>=7 && backlogs==0 && tenth>=60 && twelfth>=60){
+
+result.style.color="green";
+
+result.innerHTML="✅ Eligible for Placement";
+
+}
+
+else{
+
+result.style.color="red";
+
+result.innerHTML="❌ Not Eligible";
+
+}
+
+}
+
+function updateStatus(){
+
+document.getElementById("tcs").innerHTML="Applied";
+
+document.getElementById("infosys").innerHTML="Interview Scheduled";
+
+document.getElementById("wipro").innerHTML="Selected";
+
+document.getElementById("accenture").innerHTML="Offer Letter";
+
+document.getElementById("capgemini").innerHTML="HR Round";
+
+alert("Placement Status Updated");
+
+}
+
+</script>
+<script src="js/login.js"></script>
+<script src="js/validation.js"></script>
+</body>
+</html>

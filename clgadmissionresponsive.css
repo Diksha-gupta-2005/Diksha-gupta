@@ -1,0 +1,27 @@
+@media(max-width:768px){
+
+nav{
+    flex-direction:column;
+}
+
+.cards{
+    grid-template-columns:1fr;
+}
+
+.summary{
+    flex-direction:column;
+    gap:20px;
+}
+
+table{
+    display:block;
+    overflow-x:auto;
+}
+
+.login-box,
+.register-box,
+.admission-form{
+    width:95%;
+}
+
+}

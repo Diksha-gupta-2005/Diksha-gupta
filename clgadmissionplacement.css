@@ -1,0 +1,21 @@
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    background:#0077b6;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    border:1px solid #ccc;
+    padding:10px;
+    text-align:center;
+}
+
+.status{
+    font-weight:bold;
+    color:green;
+}

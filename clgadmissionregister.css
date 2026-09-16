@@ -1,0 +1,14 @@
+.register-box{
+    width:500px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+}
+
+.register-box input,
+.register-box select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
